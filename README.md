@@ -57,7 +57,8 @@ Asegúrate de tener **Node.js** y **npm** instalados en tu máquina.
 
 4. **Acceder a la aplicación**:
 
-   Abre tu navegador y ve a `http://localhost:3000` para ver la aplicación en funcionamiento.
+   Abre tu navegador y ve a `http://localhost:5173/login` para ver la aplicación en funcionamiento, primero lo lleva a un login de prueba que no necesita datos y accedes
+   a la pagina principal.
 
 ## 📂 **Estructura del Proyecto**
 
