@@ -1,10 +1,9 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 import { readStorage, writeStorage } from '../lib/storage';
+import { DEMO_USER } from '../data/demoUser';
 
 const SESSION_KEY = 'adminpanel:session';
 
-// Credenciales de demostración: esta app no tiene backend.
-export const DEMO_USER = { username: 'admin', password: 'admin123' };
 
 const AuthContext = createContext(null);
 

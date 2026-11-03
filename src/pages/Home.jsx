@@ -1,35 +1,33 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
+import { useData } from '../context/DataContext';
 
-function Home() {
+const cards = [
+  { resource: 'clientes', to: '/clientes', title: 'Clientes', text: 'Administra tu lista de clientes', bg: 'bg-blue-50', fg: 'text-blue-600' },
+  { resource: 'proveedores', to: '/proveedores', title: 'Proveedores', text: 'Gestiona tus proveedores', bg: 'bg-green-50', fg: 'text-green-600' },
+  { resource: 'usuarios', to: '/usuarios', title: 'Usuarios', text: 'Controla los accesos al sistema', bg: 'bg-purple-50', fg: 'text-purple-600' },
+];
+
+const Home = () => {
+  const { data } = useData();
+
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Bienvenido al Panel Administrativo</h1>
-
-      {/* Contenedor de las tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Panel de Clientes */}
-        <div className="bg-blue-50 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="text-xl font-semibold text-blue-600">Clientes</h2>
-          <p className="text-gray-700 text-2xl font-bold">24</p>
-          <p className="text-sm text-gray-500">Administra tu lista de clientes</p>
-        </div>
-
-        {/* Panel de Proveedores */}
-        <div className="bg-green-50 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="text-xl font-semibold text-green-600">Proveedores</h2>
-          <p className="text-gray-700 text-2xl font-bold">8</p>
-          <p className="text-sm text-gray-500">Gestiona tus proveedores</p>
-        </div>
-
-        {/* Panel de Usuarios */}
-        <div className="bg-purple-50 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow">
-          <h2 className="text-xl font-semibold text-purple-600">Usuarios</h2>
-          <p className="text-gray-700 text-2xl font-bold">5</p>
-          <p className="text-sm text-gray-500">Controla los accesos al sistema</p>
-        </div>
+    <div>
+      <h1 className="mb-6 text-3xl font-bold text-gray-900">Bienvenido al Panel Administrativo</h1>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((card) => (
+          <Link
+            key={card.resource}
+            to={card.to}
+            className={`rounded-lg p-6 shadow-lg transition-shadow hover:shadow-xl ${card.bg}`}
+          >
+            <h2 className={`text-xl font-semibold ${card.fg}`}>{card.title}</h2>
+            <p className="text-2xl font-bold text-gray-700">{data[card.resource].length}</p>
+            <p className="text-sm text-gray-500">{card.text}</p>
+          </Link>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default Home;

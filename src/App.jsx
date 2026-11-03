@@ -1,42 +1,35 @@
-import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { DataProvider } from './context/DataContext';
 import Layout from './components/Layout';
-import Clientes from './pages/Clientes';
-import Proveedor from './pages/Proveedor';
-import Usuarios from './pages/Usuarios';
-import Logout from './pages/Logout';
-import Home from './pages/Home'; 
 import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import About from './pages/About';
+import Clientes from './pages/Clientes';
+import Home from './pages/Home';
+import Proveedores from './pages/Proveedores';
+import Usuarios from './pages/Usuarios';
 
-const App = () => {
-  // Usamos useState para manejar el estado de autenticación
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Función para simular el login
-  const handleLogin = () => {
-    setIsAuthenticated(true); // Cambiar el estado a autenticado
-  };
-
-  return (
-    <Router>
-      <Routes>
-        {/* Si el usuario está autenticado, muestra el Layout; si no, redirige a /login */}
-        <Route
-          path="/"
-          element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}
-        >
-          <Route index element={<Home />} />
-          <Route path="clientes" element={<Clientes />} />
-          <Route path="proveedor" element={<Proveedor />} />
-          <Route path="usuarios" element={<Usuarios />} />
-          <Route path="logout" element={<Logout />} />
-        </Route>
-
-        {/* Ruta para login */}
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-      </Routes>
-    </Router>
-  );
-};
+const App = () => (
+  <AuthProvider>
+    <DataProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route element={<ProtectedRoute />}>
+            <Route element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="clientes" element={<Clientes />} />
+              <Route path="proveedores" element={<Proveedores />} />
+              <Route path="usuarios" element={<Usuarios />} />
+              <Route path="acerca" element={<About />} />
+            </Route>
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </DataProvider>
+  </AuthProvider>
+);
 
 export default App;
