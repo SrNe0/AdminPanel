@@ -1,6 +1,7 @@
 # AdminPanel
 
-[![CI](https://github.com/SrNe0/AdminPanel/actions/workflows/ci.yml/badge.svg)](https://github.com/SrNe0/AdminPanel/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/SrNe0/AdminPanel/actions/workflows/ci.yml/badge.svg)](https://github.com/SrNe0/AdminPanel/actions/workflows/ci.yml)
+[![Demo](https://img.shields.io/badge/demo-admin.srne0.dev-3ddc97)](https://admin.srne0.dev)
 [![Licencia: MIT](https://img.shields.io/badge/Licencia-MIT-yellow.svg)](LICENSE)
 ![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)
 ![Vite](https://img.shields.io/badge/Vite-6-646cff?logo=vite&logoColor=white)
