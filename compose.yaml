@@ -1,0 +1,12 @@
+services:
+  web:
+    build: .
+    ports:
+      # Solo en localhost: el acceso público es por el Cloudflare Tunnel
+      - "127.0.0.1:${WEB_PORT:-8090}:80"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/ || exit 1"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
